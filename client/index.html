@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Obsidian Reserve - Executive Admin Suite</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "var(--color-surface)",
+              "surface-dim": "var(--color-surface-dim)",
+              "surface-bright": "var(--color-surface-bright)",
+              "surface-container-lowest": "var(--color-surface-container-lowest)",
+              "surface-container-low": "var(--color-surface-container-low)",
+              "surface-container": "var(--color-surface-container)",
+              "surface-container-high": "var(--color-surface-container-high)",
+              "surface-container-highest": "var(--color-surface-container-highest)",
+              "on-surface": "var(--color-on-surface)",
+              "on-surface-variant": "var(--color-on-surface-variant)",
+              "inverse-surface": "var(--color-inverse-surface)",
+              "inverse-on-surface": "var(--color-inverse-on-surface)",
+              "outline": "var(--color-outline)",
+              "outline-variant": "var(--color-outline-variant)",
+              "primary": "var(--color-primary)",
+              "on-primary": "var(--color-on-primary)",
+              "primary-container": "var(--color-primary-container)",
+              "on-primary-container": "var(--color-on-primary-container)",
+              "secondary": "var(--color-secondary)",
+              "on-secondary": "var(--color-on-secondary)",
+              "secondary-container": "var(--color-secondary-container)",
+              "on-secondary-container": "var(--color-on-secondary-container)",
+              "success-emerald": "var(--color-success-emerald)",
+              "warning-amber": "var(--color-warning-amber)",
+              "error": "var(--color-error)",
+              "error-red": "var(--color-error-red)",
+              "background": "var(--color-background)",
+              "on-background": "var(--color-on-background)",
+              "white": "rgb(var(--color-white) / <alpha-value>)",
+              "black": "rgb(var(--color-black) / <alpha-value>)",
+              "glass-border": "var(--glass-border)",
+              "glass-border-highlight": "var(--glass-border-top)",
+              "glass-fill": "var(--glass-bg)"
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem",
+              "sm": "0.125rem",
+              "md": "0.375rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            fontFamily: {
+              "body": ["Geist", "Inter", "sans-serif"],
+              "body-md": ["Geist", "Inter", "sans-serif"],
+              "body-sm": ["Geist", "Inter", "sans-serif"],
+              "headline-lg": ["Geist", "Inter", "sans-serif"],
+              "headline-md": ["Geist", "Inter", "sans-serif"],
+              "display-xl": ["Geist", "Inter", "sans-serif"],
+              "mono-xs": ["JetBrains Mono", "monospace"],
+              "label-sm": ["JetBrains Mono", "monospace"],
+              "label-md": ["JetBrains Mono", "monospace"]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      :root, html.dark {
+        --color-surface: #12131a;
+        --color-surface-dim: #12131a;
+        --color-surface-bright: #383941;
+        --color-surface-container-lowest: #0d0e15;
+        --color-surface-container-low: #1a1b22;
+        --color-surface-container: #1e1f26;
+        --color-surface-container-high: #292931;
+        --color-surface-container-highest: #33343c;
+        --color-on-surface: #e3e1ec;
+        --color-on-surface-variant: #c4c7c8;
+        --color-inverse-surface: #e3e1ec;
+        --color-inverse-on-surface: #2f3038;
+        --color-outline: #8e9192;
+        --color-outline-variant: #444748;
+        --color-primary: #ffffff;
+        --color-on-primary: #2f3131;
+        --color-primary-container: #e2e2e2;
+        --color-on-primary-container: #636565;
+        --color-secondary: #c6c5cf;
+        --color-on-secondary: #2f3038;
+        --color-secondary-container: #4a4b53;
+        --color-on-secondary-container: #bcbbc5;
+        --color-success-emerald: #34d399;
+        --color-warning-amber: #fbbf24;
+        --color-error: #ffb4ab;
+        --color-error-red: #ffb4ab;
+        --color-background: #12131a;
+        --color-on-background: #e3e1ec;
+        --color-white: 255, 255, 255;
+        --color-black: 0, 0, 0;
+        --glass-bg: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-border-top: rgba(255, 255, 255, 0.15);
+        --mesh-bg: radial-gradient(at 0% 0%, hsla(240, 15%, 15%, 1) 0px, transparent 50%),
+                   radial-gradient(at 100% 0%, hsla(220, 10%, 10%, 1) 0px, transparent 50%),
+                   radial-gradient(at 100% 100%, hsla(240, 20%, 8%, 1) 0px, transparent 50%),
+                   radial-gradient(at 0% 100%, hsla(230, 15%, 12%, 1) 0px, transparent 50%);
+        --scrollbar-track: #0d0e15;
+        --scrollbar-thumb: #33343c;
+        --scrollbar-thumb-hover: #444748;
+      }
+      html.light {
+        --color-surface: #f4f6fb;
+        --color-surface-dim: #eaecf3;
+        --color-surface-bright: #ffffff;
+        --color-surface-container-lowest: #ffffff;
+        --color-surface-container-low: #f8f9fc;
+        --color-surface-container: #edf0f7;
+        --color-surface-container-high: #e2e6f0;
+        --color-surface-container-highest: #d5dce8;
+        --color-on-surface: #0f172a;
+        --color-on-surface-variant: #475569;
+        --color-inverse-surface: #1e293b;
+        --color-inverse-on-surface: #f8fafc;
+        --color-outline: #94a3b8;
+        --color-outline-variant: #cbd5e1;
+        --color-primary: #0f172a;
+        --color-on-primary: #ffffff;
+        --color-primary-container: #e2e8f0;
+        --color-on-primary-container: #0f172a;
+        --color-secondary: #475569;
+        --color-on-secondary: #ffffff;
+        --color-secondary-container: #f1f5f9;
+        --color-on-secondary-container: #1e293b;
+        --color-success-emerald: #059669;
+        --color-warning-amber: #d97706;
+        --color-error: #dc2626;
+        --color-error-red: #dc2626;
+        --color-background: #f4f6fb;
+        --color-on-background: #0f172a;
+        --color-white: 15, 23, 42;
+        --color-black: 255, 255, 255;
+        --glass-bg: rgba(255, 255, 255, 0.85);
+        --glass-border: rgba(15, 23, 42, 0.08);
+        --glass-border-top: rgba(15, 23, 42, 0.15);
+        --mesh-bg: radial-gradient(at 0% 0%, hsla(215, 45%, 94%, 1) 0px, transparent 50%),
+                   radial-gradient(at 100% 0%, hsla(225, 40%, 91%, 1) 0px, transparent 50%),
+                   radial-gradient(at 100% 100%, hsla(210, 35%, 95%, 1) 0px, transparent 50%),
+                   radial-gradient(at 0% 100%, hsla(220, 45%, 93%, 1) 0px, transparent 50%);
+        --scrollbar-track: #f1f5f9;
+        --scrollbar-thumb: #cbd5e1;
+        --scrollbar-thumb-hover: #94a3b8;
+      }
+      .glass-panel {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-top: 1px solid var(--glass-border-top);
+      }
+      .bg-mesh {
+        background-image: var(--mesh-bg);
+      }
+      .subtle-border {
+        border: 1px solid var(--glass-border);
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--scrollbar-track);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-thumb);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--scrollbar-thumb-hover);
+      }
+    </style>
+  </head>
+  <body class="bg-surface text-on-surface min-h-screen font-body selection:bg-white/20 selection:text-white transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
