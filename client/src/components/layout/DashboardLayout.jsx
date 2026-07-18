@@ -14,7 +14,7 @@ export const DashboardLayout = React.memo(function DashboardLayout({ children, c
         setMobileOpen={setMobileOpen}
       />
 
-      <div className="flex-1 md:ml-64 flex flex-col min-w-0 min-h-screen">
+      <div className="flex-1 flex flex-col min-w-0 min-h-screen">
         <Navbar 
           currentPath={currentPath} 
           params={params} 
