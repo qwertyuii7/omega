@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Obsidian Reserve - Executive Admin Suite</title>
+    <title>Omega</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -24,11 +24,13 @@
               "surface-container-highest": "var(--color-surface-container-highest)",
               "on-surface": "var(--color-on-surface)",
               "on-surface-variant": "var(--color-on-surface-variant)",
+              "on-surface-muted": "var(--color-on-surface-muted)",
               "inverse-surface": "var(--color-inverse-surface)",
               "inverse-on-surface": "var(--color-inverse-on-surface)",
               "outline": "var(--color-outline)",
               "outline-variant": "var(--color-outline-variant)",
               "primary": "var(--color-primary)",
+              "primary-hover": "var(--color-primary-hover)",
               "on-primary": "var(--color-on-primary)",
               "primary-container": "var(--color-primary-container)",
               "on-primary-container": "var(--color-on-primary-container)",
@@ -49,125 +51,215 @@
               "glass-fill": "var(--glass-bg)"
             },
             borderRadius: {
-              "DEFAULT": "0.25rem",
-              "sm": "0.125rem",
-              "md": "0.375rem",
-              "lg": "0.5rem",
-              "xl": "0.75rem",
+              "DEFAULT": "6px",
+              "sm": "4px",
+              "md": "8px",
+              "lg": "12px",
+              "xl": "16px",
               "full": "9999px"
             },
+            boxShadow: {
+              "level-1": "var(--shadow-1)",
+              "level-2": "var(--shadow-2)",
+              "level-3": "var(--shadow-3)"
+            },
+            fontSize: {
+              "xs": "clamp(11px, 1vw + 4px, 12px)",
+              "sm": "clamp(12px, 1.2vw + 4px, 14px)",
+              "base": "clamp(14px, 1.5vw + 4px, 16px)",
+              "lg": "clamp(16px, 1.8vw + 4px, 20px)",
+              "xl": "clamp(20px, 2.2vw + 6px, 25px)",
+              "2xl": "clamp(24px, 2.8vw + 8px, 31px)",
+              "3xl": "clamp(28px, 3.5vw + 10px, 39px)",
+              "4xl": "clamp(34px, 4.5vw + 12px, 49px)",
+            },
             fontFamily: {
-              "body": ["Geist", "Inter", "sans-serif"],
-              "body-md": ["Geist", "Inter", "sans-serif"],
-              "body-sm": ["Geist", "Inter", "sans-serif"],
-              "headline-lg": ["Geist", "Inter", "sans-serif"],
-              "headline-md": ["Geist", "Inter", "sans-serif"],
-              "display-xl": ["Geist", "Inter", "sans-serif"],
-              "mono-xs": ["JetBrains Mono", "monospace"],
-              "label-sm": ["JetBrains Mono", "monospace"],
-              "label-md": ["JetBrains Mono", "monospace"]
+              "body": ["Inter", "sans-serif"],
+              "display": ["Playfair Display", "serif"],
+              "body-md": ["Inter", "sans-serif"],
+              "body-sm": ["Inter", "sans-serif"],
+              "headline-lg": ["Playfair Display", "serif"],
+              "headline-md": ["Playfair Display", "serif"],
+              "display-xl": ["Playfair Display", "serif"],
+              "mono-xs": ["Inter", "sans-serif"],
+              "label-sm": ["Inter", "sans-serif"],
+              "label-md": ["Inter", "sans-serif"]
+            },
+            letterSpacing: {
+              "widest": "0.05em",
+              "caps": "0.02em"
+            },
+            spacing: {
+              "1": "4px",
+              "2": "8px",
+              "3": "12px",
+              "4": "16px",
+              "6": "24px",
+              "8": "32px",
+              "12": "48px",
+              "16": "64px",
+              "24": "96px",
+              "32": "128px"
             }
           }
         }
       }
     </script>
     <style>
-      :root, html.dark {
-        --color-surface: #12131a;
-        --color-surface-dim: #12131a;
-        --color-surface-bright: #383941;
-        --color-surface-container-lowest: #0d0e15;
-        --color-surface-container-low: #1a1b22;
-        --color-surface-container: #1e1f26;
-        --color-surface-container-high: #292931;
-        --color-surface-container-highest: #33343c;
-        --color-on-surface: #e3e1ec;
-        --color-on-surface-variant: #c4c7c8;
-        --color-inverse-surface: #e3e1ec;
-        --color-inverse-on-surface: #2f3038;
-        --color-outline: #8e9192;
-        --color-outline-variant: #444748;
-        --color-primary: #ffffff;
-        --color-on-primary: #2f3131;
-        --color-primary-container: #e2e2e2;
-        --color-on-primary-container: #636565;
-        --color-secondary: #c6c5cf;
-        --color-on-secondary: #2f3038;
-        --color-secondary-container: #4a4b53;
-        --color-on-secondary-container: #bcbbc5;
-        --color-success-emerald: #34d399;
-        --color-warning-amber: #fbbf24;
-        --color-error: #ffb4ab;
-        --color-error-red: #ffb4ab;
-        --color-background: #12131a;
-        --color-on-background: #e3e1ec;
-        --color-white: 255, 255, 255;
-        --color-black: 0, 0, 0;
-        --glass-bg: rgba(255, 255, 255, 0.03);
-        --glass-border: rgba(255, 255, 255, 0.08);
-        --glass-border-top: rgba(255, 255, 255, 0.15);
-        --mesh-bg: radial-gradient(at 0% 0%, hsla(240, 15%, 15%, 1) 0px, transparent 50%),
-                   radial-gradient(at 100% 0%, hsla(220, 10%, 10%, 1) 0px, transparent 50%),
-                   radial-gradient(at 100% 100%, hsla(240, 20%, 8%, 1) 0px, transparent 50%),
-                   radial-gradient(at 0% 100%, hsla(230, 15%, 12%, 1) 0px, transparent 50%);
-        --scrollbar-track: #0d0e15;
-        --scrollbar-thumb: #33343c;
-        --scrollbar-thumb-hover: #444748;
-      }
-      html.light {
-        --color-surface: #f4f6fb;
-        --color-surface-dim: #eaecf3;
+      :root, html.dark, html.light {
+        /* Base Backgrounds */
+        --color-surface: #ffffff;
+        --color-surface-dim: #f7f6f4;
         --color-surface-bright: #ffffff;
         --color-surface-container-lowest: #ffffff;
-        --color-surface-container-low: #f8f9fc;
-        --color-surface-container: #edf0f7;
-        --color-surface-container-high: #e2e6f0;
-        --color-surface-container-highest: #d5dce8;
-        --color-on-surface: #0f172a;
-        --color-on-surface-variant: #475569;
-        --color-inverse-surface: #1e293b;
-        --color-inverse-on-surface: #f8fafc;
-        --color-outline: #94a3b8;
-        --color-outline-variant: #cbd5e1;
-        --color-primary: #0f172a;
+        --color-surface-container-low: #fafaf8;
+        --color-surface-container: #ffffff;
+        --color-surface-container-high: #f2f1ef;
+        --color-surface-container-highest: #e8e6e1;
+        --color-background: #fafaf8;
+        
+        /* Text Colors */
+        --color-on-background: #1c1c1a;
+        --color-on-surface: #1c1c1a;
+        --color-on-surface-variant: #6b6b65;
+        --color-on-surface-muted: #a3a39c;
+        
+        /* Borders & Dividers */
+        --color-outline: #e8e6e1;
+        --color-outline-variant: #dcdad4;
+        
+        /* Primary Accent (Champagne Gold) */
+        --color-primary: #b8935f;
+        --color-primary-hover: color-mix(in srgb, #b8935f, black 10%);
         --color-on-primary: #ffffff;
-        --color-primary-container: #e2e8f0;
-        --color-on-primary-container: #0f172a;
-        --color-secondary: #475569;
+        --color-primary-container: #d9b88c;
+        --color-on-primary-container: #1c1c1a;
+        
+        /* Secondary */
+        --color-secondary: #6b6b65;
         --color-on-secondary: #ffffff;
-        --color-secondary-container: #f1f5f9;
-        --color-on-secondary-container: #1e293b;
-        --color-success-emerald: #059669;
-        --color-warning-amber: #d97706;
-        --color-error: #dc2626;
-        --color-error-red: #dc2626;
-        --color-background: #f4f6fb;
-        --color-on-background: #0f172a;
-        --color-white: 15, 23, 42;
-        --color-black: 255, 255, 255;
-        --glass-bg: rgba(255, 255, 255, 0.85);
-        --glass-border: rgba(15, 23, 42, 0.08);
-        --glass-border-top: rgba(15, 23, 42, 0.15);
-        --mesh-bg: radial-gradient(at 0% 0%, hsla(215, 45%, 94%, 1) 0px, transparent 50%),
-                   radial-gradient(at 100% 0%, hsla(225, 40%, 91%, 1) 0px, transparent 50%),
-                   radial-gradient(at 100% 100%, hsla(210, 35%, 95%, 1) 0px, transparent 50%),
-                   radial-gradient(at 0% 100%, hsla(220, 45%, 93%, 1) 0px, transparent 50%);
-        --scrollbar-track: #f1f5f9;
-        --scrollbar-thumb: #cbd5e1;
-        --scrollbar-thumb-hover: #94a3b8;
+        --color-secondary-container: #e8e6e1;
+        --color-on-secondary-container: #1c1c1a;
+        
+        /* Inverses */
+        --color-inverse-surface: #1c1c1a;
+        --color-inverse-on-surface: #fafaf8;
+        
+        /* Status Colors (Muted) */
+        --color-success-emerald: #2d5f3e;
+        --color-warning-amber: #9c6b1f;
+        --color-error: #8b2e2e;
+        --color-error-red: #8b2e2e;
+        
+        /* Primitives */
+        --color-white: 255, 255, 255;
+        --color-black: 28, 28, 26;
+        
+        /* Legacy variables (making them neutral) */
+        --glass-bg: rgba(255, 255, 255, 0.95);
+        --glass-border: rgba(0, 0, 0, 0.05);
+        --glass-border-top: rgba(0, 0, 0, 0.05);
+        --mesh-bg: none;
+        
+        /* Scrollbar */
+        --scrollbar-track: #fafaf8;
+        --scrollbar-thumb: #e8e6e1;
+        --scrollbar-thumb-hover: #dcdad4;
+
+        /* Shadows */
+        --shadow-1: 0 1px 2px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.06);
+        --shadow-2: 0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.08);
+        --shadow-3: 0 10px 25px rgba(0,0,0,0.10), 0 20px 48px rgba(0,0,0,0.12);
       }
+
+      html.dark {
+        --color-surface: #1F1E1B;
+        --color-surface-dim: #161512;
+        --color-surface-bright: #2A2823;
+        --color-surface-container-lowest: #161512;
+        --color-surface-container-low: #161512;
+        --color-surface-container: #1F1E1B;
+        --color-surface-container-high: #2A2823;
+        --color-surface-container-highest: #2F2E2A;
+        --color-background: #161512;
+        
+        --color-on-background: #F2F0EA;
+        --color-on-surface: #F2F0EA;
+        --color-on-surface-variant: #A8A59D;
+        --color-on-surface-muted: #6E6B64;
+        
+        --color-outline: #3A3833;
+        --color-outline-variant: #2A2823;
+        
+        --color-primary: #C9A876;
+        --color-primary-hover: #D5B888;
+        --color-on-primary: #161512;
+        --color-primary-container: #5C4D35;
+        --color-on-primary-container: #F2F0EA;
+        
+        --color-secondary: #A8A59D;
+        --color-on-secondary: #161512;
+        --color-secondary-container: #3A3833;
+        --color-on-secondary-container: #F2F0EA;
+        
+        --color-inverse-surface: #F2F0EA;
+        --color-inverse-on-surface: #161512;
+        
+        --color-success-emerald: #4A8562;
+        --color-warning-amber: #C99A4A;
+        --color-error: #B85454;
+        --color-error-red: #B85454;
+        
+        --color-white: 255, 255, 255;
+        --color-black: 22, 21, 18;
+        
+        --scrollbar-track: #161512;
+        --scrollbar-thumb: #3A3833;
+        --scrollbar-thumb-hover: #4A4843;
+        
+        --shadow-1: 0 1px 2px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.25);
+        --shadow-2: 0 4px 6px rgba(0,0,0,0.25), 0 10px 15px rgba(0,0,0,0.30);
+        --shadow-3: 0 10px 25px rgba(0,0,0,0.35), 0 20px 48px rgba(0,0,0,0.45);
+      }
+      body {
+        line-height: 1.5;
+      }
+      h1, h2, h3, h4, h5, h6, .font-display, .font-display-xl, .font-headline-lg, .font-headline-md {
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+      }
+      
+      /* Global Animation Utilities */
+      .animate-fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 400ms ease-out, transform 400ms ease-out;
+      }
+      .animate-fade-up.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Skeleton Animation */
+      @keyframes skeleton-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+      .skeleton {
+        background-color: var(--color-surface-container-highest);
+        animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        border-radius: 4px;
+      }
+      
       .glass-panel {
-        background: var(--glass-bg);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid var(--glass-border);
-        border-top: 1px solid var(--glass-border-top);
+        background: var(--color-surface);
+        border: 1px solid var(--color-outline);
       }
       .bg-mesh {
-        background-image: var(--mesh-bg);
+        background: var(--color-background);
       }
       .subtle-border {
-        border: 1px solid var(--glass-border);
+        border: 1px solid var(--color-outline);
       }
       .hide-scrollbar::-webkit-scrollbar {
         display: none;
@@ -192,7 +284,7 @@
       }
     </style>
   </head>
-  <body class="bg-surface text-on-surface min-h-screen font-body selection:bg-white/20 selection:text-white transition-colors duration-300">
+  <body class="bg-surface text-on-surface min-h-screen font-body selection:bg-primary/20 selection:text-primary transition-colors duration-200">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
