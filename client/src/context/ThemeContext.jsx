@@ -4,7 +4,9 @@ const ThemeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
   const [theme, setThemeState] = useState(() => {
-    return localStorage.getItem('obsidian_theme') || 'dark';
+    const saved = localStorage.getItem('omega-theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
   useEffect(() => {
@@ -16,7 +18,7 @@ export function ThemeProvider({ children }) {
       root.classList.remove('light');
       root.classList.add('dark');
     }
-    localStorage.setItem('obsidian_theme', theme);
+    localStorage.setItem('omega-theme', theme);
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
