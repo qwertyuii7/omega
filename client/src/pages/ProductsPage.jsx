@@ -98,22 +98,28 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center h-96 space-y-4">
-        <div className="w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
-        <p className="font-label-sm text-sm text-on-surface-variant uppercase tracking-widest">Loading Product Registry...</p>
+      <div className="space-y-6">
+        <div className="flex flex-col md:flex-row justify-between gap-6">
+          <div className="skeleton w-64 h-12"></div>
+          <div className="skeleton w-full md:w-96 h-12"></div>
+        </div>
+        <div className="skeleton w-full h-24"></div>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+          {[1,2,3,4,5,6,7,8].map(i => <div key={i} className="skeleton aspect-[3/4] w-full rounded-2xl"></div>)}
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="glass-panel p-8 rounded-2xl text-center max-w-lg mx-auto my-12 border-error-red/40">
-        <span className="material-symbols-outlined text-4xl text-error-red mb-3">error</span>
-        <h3 className="font-headline-lg text-lg font-bold text-white mb-2">Registry Connection Error</h3>
+      <div className="bg-surface-container p-8 rounded-2xl text-center max-w-lg mx-auto my-12 border border-error/40">
+        <span className="material-symbols-outlined text-4xl text-error mb-3">error</span>
+        <h3 className="font-headline-lg text-lg font-bold text-on-surface mb-2">Registry Connection Error</h3>
         <p className="font-body text-sm text-on-surface-variant mb-6">{error}</p>
         <button
           onClick={() => window.location.reload()}
-          className="px-6 py-2.5 rounded-xl bg-white text-black font-body text-xs font-bold uppercase tracking-wider hover:bg-white/90"
+          className="px-6 py-2.5 rounded-xl bg-primary text-on-primary font-body text-xs font-bold uppercase tracking-wider hover:bg-primary/90"
         >
           Retry Connection
         </button>
@@ -125,28 +131,25 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
-          <h1 className="font-display-xl text-2xl md:text-4xl font-bold text-white tracking-tight mb-2">
-            Product Registry
+          <h1 className="font-display text-4xl md:text-5xl font-bold text-on-surface tracking-tight mb-2">
+            Products
           </h1>
-          <p className="font-body text-sm text-on-surface-variant max-w-2xl leading-relaxed">
-            Comprehensive overview of active inventory, strategic positioning, and specifications. Utilize advanced multi-category filtering, sorting, and customizable schemas.
-          </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto justify-end">
           <button
             onClick={() => setShowColumnModal(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container border border-white/10 hover:border-white/30 text-white font-label-sm text-xs transition-colors shadow-sm"
+            className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl bg-surface-container border border-outline-variant hover:border-outline text-on-surface font-label-sm text-xs transition-colors"
           >
             <span className="material-symbols-outlined text-base">view_column</span>
             <span>Columns</span>
           </button>
 
-          <div className="flex rounded-xl bg-surface-container p-1 border border-white/10">
+          <div className="flex rounded-xl bg-surface-container p-1 border border-outline-variant">
             <button
               onClick={() => handleViewChange('table')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-label-sm text-xs transition-colors ${
-                params.view !== 'grid' ? 'bg-white text-black font-semibold shadow' : 'text-on-surface-variant hover:text-white'
+              className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-lg font-label-sm text-xs transition-colors ${
+                params.view !== 'grid' ? 'bg-primary text-on-primary font-semibold shadow' : 'text-on-surface-variant hover:text-on-surface'
               }`}
             >
               <span className="material-symbols-outlined text-base">table_rows</span>
@@ -154,8 +157,8 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
             </button>
             <button
               onClick={() => handleViewChange('grid')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-label-sm text-xs transition-colors ${
-                params.view === 'grid' ? 'bg-white text-black font-semibold shadow' : 'text-on-surface-variant hover:text-white'
+              className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-lg font-label-sm text-xs transition-colors ${
+                params.view === 'grid' ? 'bg-primary text-on-primary font-semibold shadow' : 'text-on-surface-variant hover:text-on-surface'
               }`}
             >
               <span className="material-symbols-outlined text-base">grid_view</span>
@@ -165,27 +168,27 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
         </div>
       </div>
 
-      <div className="border border-white/10 rounded-2xl p-4 bg-surface-container-lowest/60 backdrop-blur-md space-y-4">
+      <div className="border border-outline-variant rounded-2xl p-4 bg-surface-container space-y-4">
         <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
           <div className="flex items-center gap-2 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 hide-scrollbar">
             <button
               onClick={() => handleCategoryChange('all')}
-              className={`whitespace-nowrap px-4 py-2 rounded-xl font-label-sm text-xs border transition-all ${
+              className={`whitespace-nowrap px-4 py-2 min-h-[44px] rounded-xl font-label-sm text-xs border transition-all ${
                 (!params.category || params.category === 'all')
-                  ? 'bg-white text-black font-bold border-white shadow-[0_0_15px_rgba(255,255,255,0.15)]'
-                  : 'bg-surface-container-high border-white/10 text-on-surface-variant hover:text-white hover:border-white/20'
+                  ? 'bg-primary text-on-primary font-bold border-primary'
+                  : 'bg-surface-container border-outline-variant text-on-surface-variant hover:text-on-surface hover:border-outline'
               }`}
             >
-              All Categories ({products.length})
+              All ({products.length})
             </button>
             {categories.slice(0, 8).map((cat) => (
               <button
                 key={cat}
                 onClick={() => handleCategoryChange(cat)}
-                className={`whitespace-nowrap px-3.5 py-2 rounded-xl font-label-sm text-xs capitalize border transition-all ${
+                className={`whitespace-nowrap px-3.5 py-2 min-h-[44px] rounded-xl font-label-sm text-xs capitalize border transition-all ${
                   params.category === cat
-                    ? 'bg-white text-black font-bold border-white shadow-[0_0_15px_rgba(255,255,255,0.15)]'
-                    : 'bg-transparent border-white/10 text-on-surface-variant hover:text-white hover:bg-white/5'
+                    ? 'bg-primary text-on-primary font-bold border-primary'
+                    : 'bg-transparent border-outline-variant text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest'
                 }`}
               >
                 {cat}
@@ -205,10 +208,10 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
                 <button
                   key={s.id}
                   onClick={() => handleSortChange(s.id)}
-                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-label-sm text-xs border transition-all ${
+                  className={`flex items-center gap-1.5 px-3.5 py-2 min-h-[44px] rounded-xl font-label-sm text-xs border transition-all ${
                     isSelected
-                      ? 'bg-white/15 text-white border-white shadow-[0_0_10px_rgba(255,255,255,0.1)] font-semibold'
-                      : 'bg-surface-container border-white/10 text-on-surface-variant hover:text-white'
+                      ? 'bg-primary text-on-primary border-primary font-semibold'
+                      : 'bg-surface-container border-outline-variant text-on-surface-variant hover:text-on-surface'
                   }`}
                 >
                   <span>{s.label}</span>
@@ -224,28 +227,28 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
         </div>
 
         {(params.category !== 'all' || params.search || params.sort !== 'none') && (
-          <div className="pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs font-label-sm">
+          <div className="pt-3 border-t border-outline-variant flex flex-wrap items-center justify-between gap-3 text-xs font-label-sm">
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-on-surface-variant">Active Filters:</span>
               {params.search && (
-                <span className="px-2.5 py-1 rounded bg-primary/10 border border-primary/30 text-white flex items-center gap-1.5">
+                <span className="px-2.5 py-1 rounded bg-primary/10 border border-primary/30 text-primary flex items-center gap-1.5">
                   Search: "{params.search}"
                 </span>
               )}
               {params.category !== 'all' && (
-                <span className="px-2.5 py-1 rounded bg-primary/10 border border-primary/30 text-white capitalize flex items-center gap-1.5">
+                <span className="px-2.5 py-1 rounded bg-primary/10 border border-primary/30 text-primary capitalize flex items-center gap-1.5">
                   Category: {params.category}
                 </span>
               )}
               {params.sort !== 'none' && (
-                <span className="px-2.5 py-1 rounded bg-primary/10 border border-primary/30 text-white capitalize flex items-center gap-1.5">
+                <span className="px-2.5 py-1 rounded bg-primary/10 border border-primary/30 text-primary capitalize flex items-center gap-1.5">
                   Sort: {params.sort} ({params.order.toUpperCase()})
                 </span>
               )}
             </div>
             <button
               onClick={() => updateParams({ search: '', category: 'all', sort: 'none', order: 'asc', page: 1 })}
-              className="text-error-red hover:underline font-semibold"
+              className="text-error hover:underline font-semibold"
             >
               Reset All Filters
             </button>
@@ -254,21 +257,21 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
       </div>
 
       {filteredProducts.length === 0 ? (
-        <div className="glass-panel p-16 rounded-2xl text-center max-w-xl mx-auto border border-white/10 my-8">
+        <div className="bg-surface-container p-16 rounded-2xl text-center max-w-xl mx-auto border border-outline-variant my-8">
           <span className="material-symbols-outlined text-5xl text-on-surface-variant mb-4">search_off</span>
-          <h3 className="font-headline-lg text-lg font-bold text-white mb-2">No Matching Products Found</h3>
+          <h3 className="font-headline-lg text-lg font-bold text-on-surface mb-2">No Matching Products Found</h3>
           <p className="font-body text-sm text-on-surface-variant mb-6">
             We couldn't find any products matching your active search queries or category filters.
           </p>
           <button
             onClick={() => updateParams({ search: '', category: 'all', sort: 'none', page: 1 })}
-            className="px-6 py-2.5 rounded-xl bg-white text-black font-body text-xs font-bold uppercase tracking-wider hover:bg-white/90"
+            className="px-6 py-2.5 min-h-[44px] rounded-xl bg-primary text-on-primary font-body text-xs font-bold uppercase tracking-wider hover:bg-primary/90"
           >
             Clear Filters
           </button>
         </div>
       ) : params.view === 'grid' ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
           {paginatedProducts.map((p) => (
             <ProductCard
               key={p.id}
@@ -279,11 +282,11 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
           ))}
         </div>
       ) : (
-        <div className="border border-white/10 rounded-2xl overflow-hidden bg-surface-container-lowest/50 backdrop-blur-md shadow-xl">
+        <div className="border border-outline-variant rounded-2xl overflow-hidden bg-surface-container shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-white/10 bg-surface-container-low/60">
+                <tr className="border-b border-outline-variant bg-surface-container-low">
                   {columns.map((col) => {
                     if (!col.visible) return null;
                     return (
@@ -300,7 +303,7 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
                   <th className="py-4 px-4 w-12"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-outline-variant">
                 {paginatedProducts.map((p) => (
                   <ProductRow
                     key={p.id}
@@ -316,18 +319,16 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
         </div>
       )}
 
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-outline-variant">
         <div className="font-body text-xs text-on-surface-variant">
-          Showing <span className="font-bold text-white">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
-          <span className="font-bold text-white">{Math.min(currentPage * itemsPerPage, filteredProducts.length)}</span> of{' '}
-          <span className="font-bold text-white">{filteredProducts.length}</span> entries
+          Showing <span className="font-bold text-on-surface">{(currentPage - 1) * itemsPerPage + 1}</span> - <span className="font-bold text-on-surface">{Math.min(currentPage * itemsPerPage, filteredProducts.length)}</span> of <span className="font-bold text-on-surface">{filteredProducts.length}</span>
         </div>
 
         <div className="flex items-center gap-2">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage <= 1}
-            className="p-2 rounded-xl bg-surface-container border border-white/10 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
+            className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl bg-surface-container border border-outline-variant text-on-surface disabled:opacity-30 disabled:cursor-not-allowed hover:bg-surface-container-highest transition-colors"
           >
             <span className="material-symbols-outlined text-base">chevron_left</span>
           </button>
@@ -344,10 +345,10 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
                     )}
                     <button
                       onClick={() => handlePageChange(page)}
-                      className={`w-9 h-9 rounded-xl font-label-sm text-xs font-bold transition-all ${
+                      className={`min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl font-label-sm text-xs font-bold transition-all ${
                         page === currentPage
-                          ? 'bg-white text-black shadow-[0_0_12px_rgba(255,255,255,0.2)]'
-                          : 'bg-surface-container border border-white/10 text-on-surface-variant hover:text-white hover:border-white/20'
+                          ? 'bg-primary text-on-primary'
+                          : 'bg-surface-container border border-outline-variant text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest'
                       }`}
                     >
                       {page}
@@ -360,7 +361,7 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage >= totalPages}
-            className="p-2 rounded-xl bg-surface-container border border-white/10 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
+            className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl bg-surface-container border border-outline-variant text-on-surface disabled:opacity-30 disabled:cursor-not-allowed hover:bg-surface-container-highest transition-colors"
           >
             <span className="material-symbols-outlined text-base">chevron_right</span>
           </button>
