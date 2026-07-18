@@ -104,7 +104,7 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
           <div className="skeleton w-full md:w-96 h-12"></div>
         </div>
         <div className="skeleton w-full h-24"></div>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6">
           {[1,2,3,4,5,6,7,8].map(i => <div key={i} className="skeleton aspect-[3/4] w-full rounded-2xl"></div>)}
         </div>
       </div>
@@ -271,7 +271,7 @@ export const ProductsPage = React.memo(function ProductsPage({ params, updatePar
           </button>
         </div>
       ) : params.view === 'grid' ? (
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6">
           {paginatedProducts.map((p) => (
             <ProductCard
               key={p.id}
